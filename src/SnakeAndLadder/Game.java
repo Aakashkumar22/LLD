@@ -15,7 +15,7 @@ public class Game {
     }
 
     void initializeGame(){
-        board=new Board(10,5,4);
+        board=new Board(7,3,3);
         dice=new Dice(1);
         winner=null;
         addplayers();
@@ -28,22 +28,25 @@ public class Game {
         playerlist.add(p2);
     }
 
-    void start(){
+    void start() {
+        while (winner == null) {
 
-        Player playerTurn=findplayerTurn();
-        System.out.println("Currr player is:"+playerTurn.id+ " current position is:"+playerTurn.currentPosition);
-        int dicnumber= dice.rolldice();
-        int playernewpos= playerTurn.currentPosition+dicnumber;
-        playernewpos=jumcheck(playernewpos);
-        playerTurn.currentPosition=playernewpos;
+            Player playerTurn = findplayerTurn();
+            System.out.println("Currr player is:" + playerTurn.id + " current position is:" + playerTurn.currentPosition);
+            int dicnumber = dice.rolldice();
+            int playernewpos = playerTurn.currentPosition + dicnumber;
+            playernewpos = jumcheck(playernewpos);
+            playerTurn.currentPosition = playernewpos;
 
-        System.out.println("Currr player is:"+playerTurn.id+ " new position is:"+playernewpos);
+            System.out.println("Currr player is:" + playerTurn.id + " new position is:" + playernewpos);
 
-        if(playernewpos>=board.cells.length*board.cells.length-1){
-            winner=playerTurn;
+            if (playernewpos >= board.cells.length * board.cells.length - 1) {
+                winner = playerTurn;
+            }
+
+
         }
-        System.out.println(" Winner is :"+ winner.id);
-
+        System.out.println(" Winner is :" + winner.id);
     }
 
      public Player findplayerTurn(){
@@ -59,7 +62,8 @@ public class Game {
 
         Cell cell= board.getcell(playernewpos);
         if(cell.jump!=null && cell.jump.start==playernewpos){
-            String Jumpby=(cell.jump.start<cell.jump.end)?"ladder":"snake";
+            String Jumpby=(cell.jump.start<cell.jump.end)? "ladder":"snake";
+            System.out.println("jump done by: " + Jumpby);
             return cell.jump.end;
         }
         return playernewpos;

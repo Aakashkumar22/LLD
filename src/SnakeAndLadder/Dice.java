@@ -15,6 +15,7 @@ public class Dice {
         int dicscrolls=0;
         while(dicscrolls<diceCount){
             totalsum+= ThreadLocalRandom.current().nextInt(1,7);
+            dicscrolls++;
         }
         return totalsum;
     }

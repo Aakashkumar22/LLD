@@ -5,9 +5,9 @@ import java.util.concurrent.ThreadLocalRandom;
 public class Board {
     Cell[][] cells;
 
-    Board(int boardsize ,int numofsnakes,int numofLadder){
+    Board(int boardsize ,int numofsnakes,int numofLadders){
         initializeCells(boardsize);
-        addsnakeandLadders(cells,numofsnakes, numofLadder);
+        addsnakeandLadders(cells,numofsnakes, numofLadders);
     }
 
     void initializeCells(int boardsize ){
